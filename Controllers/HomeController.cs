@@ -22,7 +22,7 @@ namespace ApiAuth.Controllers
             var user = UserRepository.Get(model.Username, model.Password);
 
             if (user == null)
-                return NotFound(new { message = "Usuario ou senha inválidos" });
+                throw new InvalidOperationException("Usuário ou senha inválidos");
 
             var token = TokenService.GenerateToken(user);
             user.Password = "";
